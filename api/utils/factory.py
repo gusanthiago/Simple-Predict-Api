@@ -13,11 +13,8 @@ from api.routes.routes import load_model
 def create_app(config = None):
     app = Flask(__name__)
     load_model()
-    # app.config.from_object(config)
-
     app.register_blueprint(route_path_general, url_prefix='/api')
 
-    # START GLOBAL HTTP CONFIGURATIONS
     @app.after_request
     def add_header(response):
         return response

@@ -13,20 +13,16 @@ import numpy as np
 import io
 from timeit import default_timer as timer
 
-
 route_path_general = Blueprint("route_path_general", __name__)
 
 @route_path_general.route('/imagenation', methods=['POST'])
 def predict():
 	data = []
 	if request.method == "POST":
-
 		if request.files.get("image"):
 			image = request.files["image"].read()
 			image = Image.open(io.BytesIO(image))
-
 			image = prepare_image(image, target=(224, 224))
-
 			with graph.as_default():
 				preds = model.predict(image)
 				results = imagenet_utils.decode_predictions(preds)
