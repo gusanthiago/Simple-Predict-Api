@@ -15,7 +15,7 @@ from timeit import default_timer as timer
 
 route_path_general = Blueprint("route_path_general", __name__)
 
-@route_path_general.route('/imagenation', methods=['POST'])
+@route_path_general.route('/predict', methods=['POST'])
 def predict():
 	data = []
 	if request.method == "POST":
@@ -24,19 +24,18 @@ def predict():
 			image = Image.open(io.BytesIO(image))
 			image = prepare_image(image, target=(224, 224))
 			with graph.as_default():
-				preds = model.predict(image)
-				results = imagenet_utils.decode_predictions(preds)
+				predictions = model.predict(image)
+				results = imagenet_utils.decode_predictions(predictions)
 				
 			for (imagenetID, label, prob) in results[0]:
 				r = {"label": label, "probability": float(prob)}
 				data.append(r)
-	print("Predictions:")
-	print(data)
+
 	return response_with(resp.SUCCESS_200, value=data)   
 
-@route_path_general.route('/hello', methods=['GET'])
+@route_path_general.route('/info', methods=['GET'])
 def test_api():
-	return response_with(resp.SUCCESS_200, value={'data': 'oi'})   
+	return response_with(resp.SUCCESS_200, value={'data': 'microservice to run model restnet50'})   
 
 def load_model():
 	global model
