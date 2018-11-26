@@ -35,7 +35,7 @@ def predict():
 
 @route_path_general.route('/info', methods=['GET'])
 def test_api():
-	return response_with(resp.SUCCESS_200, value={'data': 'microservice to run model restnet50'})   
+	return response_with(resp.SUCCESS_200, value={'data': 'microservice to run model resnet50'})   
 
 def load_model():
 	global model
