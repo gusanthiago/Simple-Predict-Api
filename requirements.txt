@@ -2,7 +2,7 @@ absl-py==0.6.1
 asn1crypto==0.24.0
 astor==0.7.1
 backports.weakref==1.0.post1
-bottle==0.12.13
+bottle==0.12.19
 certifi==2018.10.15
 cffi==1.11.5
 chardet==3.0.4
